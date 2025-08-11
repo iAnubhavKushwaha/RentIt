@@ -5,12 +5,12 @@ import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Home from './pages/Home';
-import Dashboard from './components/dashboard/Dashboard';
+
 
 
 const App = () => {
-    return (
-        <AuthProvider>
+  return (
+   <AuthProvider>
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -18,12 +18,11 @@ const App = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
-                    <Route path="/dashboard" element={<Dashboard/>}/>
-                    
+            
                 </Routes>
             </Router>
         </AuthProvider>
-    );
-};
+  )
+}
 
-export default App;
+export default App
