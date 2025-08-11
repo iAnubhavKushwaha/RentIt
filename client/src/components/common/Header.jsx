@@ -30,7 +30,7 @@ const Header = () => {
                     </li>
                     <li>
                         <Link
-                            to="/rental-order"
+                            to="/rental"
                             className="px-4 py-2 rounded-full text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
                         >
                             Rental

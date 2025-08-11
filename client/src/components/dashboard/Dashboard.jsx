@@ -1,5 +1,3 @@
-import React from 'react';
-import Header from '../common/Header'; // Use the common Header component
 import SearchBar from './SearchBar';
 import DateRangeSelector from './DateRangeSelector';
 import Statistics from './Statistics';

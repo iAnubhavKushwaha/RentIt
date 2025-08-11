@@ -10,28 +10,29 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         try {
             const response = await api.post('/auth/login', { email, password });
-            console.log('Login Response:', response.data); // Check response on login
-            setUser(response.data.user);
+            console.log('Login Response:', response.data); // Check the response
+
+            setUser(response.data.user); // Ensure this holds the correct user info
             localStorage.setItem('token', response.data.token);
+
+            return response.data.user; // Ensure this includes the role
         } catch (error) {
             console.error('Login error:', error);
+            return null; // Return null if there's an error
         }
     };
 
     const logout = () => {
-        console.log("Logging out..."); // Debug
         setUser(null);
         localStorage.removeItem('token');
     };
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log('Token found:', token); // Check if token exists
 
         if (token) {
             api.get('/auth/me') 
                 .then((response) => {
-                    console.log('Fetched User Data:', response.data); // User data
                     setUser(response.data);
                 })
                 .catch(() => {
@@ -43,12 +44,12 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ user, login, logout, loading }}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     );
 };
 
-// Custom hook for easier access to the AuthContext
+// Custom hook for easier access to context
 export const useAuth = () => {
     return useContext(AuthContext);
 };

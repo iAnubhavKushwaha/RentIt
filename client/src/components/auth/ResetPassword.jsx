@@ -1,3 +1,4 @@
+//src\components\auth\ResetPassword.jsx
 import React, { useState } from 'react';
 import api from '../../utils/api';
 import { useSearchParams } from 'react-router-dom';
