@@ -1,4 +1,4 @@
-//src\components\dashboard\TopCustomers.jsx
+// src/components/dashboard/TopCustomers.jsx
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -9,31 +9,32 @@ const TopCustomers = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-       const API_URL = 'http://localhost:5000/api/dashboard/top-customers'; // Use absolute URL
+        const API_URL = 'http://localhost:5000/api/dashboard/top-customers'; // Use absolute URL
 
-const fetchCustomers = async () => {
-    const token = localStorage.getItem('token');
+        const fetchCustomers = async () => {
+            const token = localStorage.getItem('token');
 
-    if (!token) {
-        setError('No token found, please log in again.');
-        setLoading(false);
-        return;
-    }
-
-    try {
-        const response = await axios.get(API_URL, {
-            headers: {
-                Authorization: `Bearer ${token}`
+            if (!token) {
+                setError('No token found, please log in again.');
+                setLoading(false);
+                return;
             }
-        });
-        console.log('Response data:', response.data);
-    } catch (err) {
-        setError(err.response?.data?.message || err.message);
-        console.error("Error fetching top customers:", err);
-    } finally {
-        setLoading(false);
-    }
-};
+
+            try {
+                const response = await axios.get(API_URL, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setCustomers(response.data); // Set customers to the fetched data
+                console.log('Response data:', response.data);
+            } catch (err) {
+                setError(err.response?.data?.message || err.message);
+                console.error("Error fetching top customers:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
         fetchCustomers();
     }, []);
@@ -42,25 +43,25 @@ const fetchCustomers = async () => {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div className="bg-white shadow rounded mb-6 p-4">
-            <h2 className="text-2xl font-bold">Top Customers</h2>
-            {customers.length === 0 ? ( // Check if customers array is empty
+        <div className="bg-white border border-zinc-200 rounded-xl mb-6 p-4 shadow-sm">
+            <h2 className="text-lg font-semibold text-zinc-800">Top Customers</h2>
+            {customers.length === 0 ? (
                 <div className="mt-4 text-gray-600">No customers found.</div>
             ) : (
-                <table className="min-w-full table-auto border mt-4">
-                    <thead className="bg-blue-100">
+                <table className="min-w-full table-auto border border-zinc-200 mt-4 text-sm">
+                    <thead className="bg-zinc-50">
                         <tr>
-                            <th className="border px-4 py-2">Customer</th>
-                            <th className="border px-4 py-2">Total Orders</th>
-                            <th className="border px-4 py-2">Total Revenue</th>
+                            <th className="border border-zinc-200 px-4 py-2 text-left text-zinc-600 font-medium">Customer</th>
+                            <th className="border border-zinc-200 px-4 py-2 text-left text-zinc-600 font-medium">Total Orders</th>
+                            <th className="border border-zinc-200 px-4 py-2 text-left text-zinc-600 font-medium">Total Revenue</th>
                         </tr>
                     </thead>
                     <tbody>
                         {customers.map((item, index) => (
-                            <tr key={index}>
-                                <td className="border px-4 py-2">{item.customerName}</td>
-                                <td className="border px-4 py-2">{item.totalOrders}</td>
-                                <td className="border px-4 py-2">${item.totalRevenue.toFixed(2)}</td>  {/* Ensure correct formatting */}
+                            <tr key={index} className="odd:bg-white even:bg-zinc-50 hover:bg-zinc-100 transition-colors">
+                                <td className="border border-zinc-200 px-4 py-2 text-zinc-700">{item.customerName}</td>
+                                <td className="border border-zinc-200 px-4 py-2 text-zinc-700">{item.totalOrders}</td>
+                                <td className="border border-zinc-200 px-4 py-2 text-zinc-700">${item.totalRevenue.toFixed(2)}</td>
                             </tr>
                         ))}
                     </tbody>
