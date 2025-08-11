@@ -1,3 +1,5 @@
+// src/App.jsx
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -6,8 +8,7 @@ import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Home from './pages/Home';
-
-import Layout from './components/common/Layout'; // new Layout wrapper
+import Layout from './components/common/Layout'; // New Layout wrapper
 import Dashboard from './components/dashboard/Dashboard';
 import RentalOrderForm from './components/orders/RentalOrderForm';
 import RentalOrdersList from './components/orders/RentalOrdersList';
