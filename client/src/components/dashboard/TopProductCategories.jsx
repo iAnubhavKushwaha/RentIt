@@ -1,39 +1,70 @@
-import React from 'react';
+// src/components/dashboard/TopProductCategories.jsx
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const TopProductCategories = () => {
-    const categories = [
-        //dummy data
-        { category: 'Electronics', ordered: 120, revenue: 15000 },
-        { category: 'Furniture', ordered: 80, revenue: 12000 },
-        { category: 'Clothing', ordered: 200, revenue: 8000 },
-        { category: 'Books', ordered: 150, revenue: 5000 },
-        { category: 'Sports', ordered: 90, revenue: 7000 },
-        { category: 'Toys', ordered: 60, revenue: 4000 },
-        { category: 'Rental - Service', ordered: 25, revenue: 2940 },
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    ];
+    useEffect(() => {
+        const API_URL = 'http://localhost:5000/api/dashboard/top-product-categories';
+
+        const fetchCategories = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                setError('No token found, please log in again.');
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const response = await axios.get(API_URL, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                console.log('Response data:', response.data); 
+                setCategories(response.data);
+            } catch (err) {
+                setError(err.response?.data?.message || err.message);
+                console.error("Error fetching top categories:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <div className="bg-white shadow rounded mb-6 p-4">
             <h2 className="text-2xl font-bold">Top Product Categories</h2>
-            <table className="min-w-full table-auto border mt-4">
-                <thead className="bg-blue-100">
-                    <tr>
-                        <th className="border px-4 py-2">Category</th>
-                        <th className="border px-4 py-2">Ordered</th>
-                        <th className="border px-4 py-2">Revenue</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {categories.map((item, index) => (
-                        <tr key={index}>
-                            <td className="border px-4 py-2">{item.category}</td>
-                            <td className="border px-4 py-2">{item.ordered}</td>
-                            <td className="border px-4 py-2">${item.revenue}</td>
+            {categories.length === 0 ? (
+                <div className="mt-4 text-gray-600">No categories found.</div>
+            ) : (
+                <table className="min-w-full table-auto border mt-4">
+                    <thead className="bg-blue-100">
+                        <tr>
+                            <th className="border px-4 py-2">Category</th>
+                            <th className="border px-4 py-2">Ordered</th>
+                            <th className="border px-4 py-2">Revenue</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {categories.map((item, index) => (
+                            <tr key={index}>
+                                <td className="border px-4 py-2">{item.category}</td>
+                                <td className="border px-4 py-2">{item.ordered}</td>
+                                <td className="border px-4 py-2">
+                                    ${typeof item.revenue === 'number' ? item.revenue.toFixed(2) : '0.00'}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
     );
 };
