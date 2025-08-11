@@ -8,10 +8,11 @@ import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Home from './pages/Home';
-import Layout from './components/common/Layout'; // New Layout wrapper
+import Layout from './components/common/Layout';
 import Dashboard from './components/dashboard/Dashboard';
 import RentalOrderForm from './components/orders/RentalOrderForm';
 import RentalOrdersList from './components/orders/RentalOrdersList';
+import Products from './components/products/Products';
 
 const App = () => {
   return (
@@ -29,6 +30,8 @@ const App = () => {
           <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
           <Route path="/rental-order" element={<Layout><RentalOrderForm /></Layout>} />
           <Route path="/rental-orders" element={<Layout><RentalOrdersList /></Layout>} />
+          <Route path="/products" element={<Layout><Products /></Layout>} />
+          {/* <Route path="/products/:id" element={<Layout><ProductDetails /></Layout>} /> */}
         </Routes>
       </Router>
     </AuthProvider>

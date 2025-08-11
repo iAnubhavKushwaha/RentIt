@@ -10,7 +10,6 @@ import TopCustomers from './TopCustomers';
 const Dashboard = () => {
     return (
         <div className="container mx-auto p-6">
-            <Header />  {/* Include the common header */}
             <SearchBar />
             <DateRangeSelector />
             <Statistics />

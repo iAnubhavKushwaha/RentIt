@@ -18,7 +18,7 @@ const RentalSidebar = ({ onFilterSelect }) => {
   return (
     <div className="w-60 bg-white border-r border-zinc-300 p-3">
       <div className="mb-4">
-        <button className="px-4 py-2 bg-purple-600 text-white rounded-lg w-full">
+        <button className="px-4 py-2 bg-zinc-600 text-white rounded-lg w-full">
           Create
         </button>
       </div>
