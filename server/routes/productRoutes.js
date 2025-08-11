@@ -1,3 +1,5 @@
+//routes\productRoutes.js
+
 import { Router } from 'express';
 import {
     createProduct,

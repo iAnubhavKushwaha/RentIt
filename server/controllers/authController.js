@@ -6,9 +6,15 @@ import crypto from 'crypto';
 
 // Register User
 export const registerUser = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body; // Accept the role from the request body
+
+    // Validate role
+    if (!['customer', 'admin'].includes(role)) {
+        return res.status(400).json({ message: 'Invalid role. Must be "customer" or "admin".' });
+    }
+    
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, password: hashedPassword, role }); // Include role in user creation
 
     try {
         const savedUser = await newUser.save();
@@ -28,7 +34,7 @@ export const loginUser = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token, user: { id: user._id, username: user.username, email: user.email } });
+    res.json({ token, user: { id: user._id, username: user.username, email: user.email, role: user.role } }); // Include role in response
 };
 
 // Forgot Password
