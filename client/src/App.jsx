@@ -5,7 +5,7 @@ import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 
 
 const App = () => {
