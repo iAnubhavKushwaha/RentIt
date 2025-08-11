@@ -10,6 +10,11 @@ const Header = () => {
         return <div>Loading...</div>; 
     }
 
+    // Conditionally render if the user role is customer
+    if (user && user.role === 'customer') {
+        return null; // Do not render the header for customers
+    }
+
     const handleLogout = () => {
         logout(); 
         navigate('/login'); 
@@ -38,7 +43,7 @@ const Header = () => {
                     </li>
                     <li>
                         <Link
-                            to="/rental-orders"
+                            to="/orders"
                             className="px-4 py-2 rounded-full text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
                         >
                             Orders
@@ -71,7 +76,7 @@ const Header = () => {
                 </ul>
             </nav>
             <div className="flex items-center">
-                <span className="text-zinc-700">{user ? user.name : 'Guest'}</span>
+                <span className="text-zinc-700">{user ? user.username : 'Guest'}</span>
                 {user && (
                     <button 
                       className="ml-4 text-zinc-700 hover:text-zinc-900" 

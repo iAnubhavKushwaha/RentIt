@@ -47,17 +47,17 @@ const App = () => {
                             </ProtectedRoute>
                         </Layout>} 
                     />
-                    <Route path="/rental-order" element={
+                    <Route path="/rental" element={
                         <Layout>
-                            <ProtectedRoute role="customer">
+                            <ProtectedRoute role="admin">
                                 <RentalOrderForm />
                             </ProtectedRoute>
                         </Layout>} 
                     />
-                    <Route path="/rental-orders" element={
+                    <Route path="/orders" element={
                         <Layout>
-                            <ProtectedRoute role="customer">
-                                <RentalOrdersList />
+                            <ProtectedRoute role="admin">
+                                <RentalOrdersList/>
                             </ProtectedRoute>
                         </Layout>} 
                     />
