@@ -1,5 +1,3 @@
-// src/components/auth/Register.jsx
-
 import React, { useState } from 'react';
 import api from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
@@ -25,15 +23,16 @@ const Register = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-200">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-96">
-                <h2 className="mb-4 text-2xl font-bold">Register</h2>
+        <div className="flex items-center justify-center min-h-screen bg-zinc-100">
+            <form onSubmit={handleSubmit} className="bg-white p-10 rounded-xl shadow-lg w-[28rem]">
+                <h2 className="mb-4 text-xl font-bold text-zinc-800">Register</h2>
+                
                 <input 
                     type="text" 
                     placeholder="Username" 
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="block w-full p-2 mb-4 border rounded" 
+                    className="block w-full p-2 py-2.5 mb-4 text-sm border border-zinc-300 focus:ring-2 focus:ring-zinc-400 focus:border-zinc-400 rounded-lg" 
                     required 
                 />
                 <input 
@@ -41,7 +40,7 @@ const Register = () => {
                     placeholder="Email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full p-2 mb-4 border rounded" 
+                    className="block w-full p-2 py-2.5 mb-4 text-sm border border-zinc-300 focus:ring-2 focus:ring-zinc-400 focus:border-zinc-400 rounded-lg" 
                     required 
                 />
                 <input 
@@ -49,21 +48,25 @@ const Register = () => {
                     placeholder="Password" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full p-2 mb-4 border rounded" 
+                    className="block w-full p-2 py-2.5 mb-4 text-sm border border-zinc-300 focus:ring-2 focus:ring-zinc-400 focus:border-zinc-400 rounded-lg" 
                     required 
                 />
+                
                 <div className="mb-4">
                     <label className="block text-gray-700 mb-2">Role</label>
                     <select 
                         value={role} 
                         onChange={(e) => setRole(e.target.value)} 
-                        className="block w-full p-2 border rounded"
+                        className="block w-full p-2 border border-gray-300 rounded"
                     >
                         <option value="customer">Customer</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>
-                <button type="submit" className="w-full p-2 bg-blue-600 text-white rounded">Register</button>
+
+                <button type="submit" className="w-full py-2.5 px-2 bg-zinc-700 hover:bg-zinc-800 text-white text-sm rounded-lg transition-colors duration-300">
+                    Register
+                </button>
             </form>
         </div>
     );

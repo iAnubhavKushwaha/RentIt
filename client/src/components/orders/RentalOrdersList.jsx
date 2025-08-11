@@ -7,7 +7,7 @@ const RentalOrdersList = () => {
 
   const orders = [
     { customer: "Customer1", orderId: "R0001", price: 2000, status: "Quotation" },
-    { customer: "Customer2", orderId: "R0002", price: 1000, status: "Pickedup" },
+    { customer: "Customer2", orderId: "R0002", price: 1000, status: "PickedUp" },
     { customer: "Customer3", orderId: "R0005", price: 3000, status: "Reserved", latePickup: "09/03/2025" },
     { customer: "Customer4", orderId: "R0006", price: 1400, status: "Returned" },
   ];

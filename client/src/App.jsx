@@ -6,11 +6,12 @@ import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Home from './pages/Home';
-import Layout from './components/common/Layout'; 
+import Layout from './components/common/Layout';
 import Dashboard from './components/dashboard/Dashboard'; // Assume this is your admin dashboard
 import RentalShop from './components/shop/RentalShop'; // Corrected path for rental shop
 import RentalOrderForm from './components/orders/RentalOrderForm';
 import RentalOrdersList from './components/orders/RentalOrdersList';
+import Products from './components/products/Products';
 
 // Protected Route Component
 const ProtectedRoute = ({ children, role }) => {
@@ -46,20 +47,29 @@ const App = () => {
                             </ProtectedRoute>
                         </Layout>} 
                     />
-                    <Route path="/rental" element={
+                    <Route path="/rental-order" element={
                         <Layout>
                             <ProtectedRoute role="customer">
                                 <RentalOrderForm />
                             </ProtectedRoute>
                         </Layout>} 
                     />
-                    <Route path="/orders" element={
+                    <Route path="/rental-orders" element={
                         <Layout>
                             <ProtectedRoute role="customer">
                                 <RentalOrdersList />
                             </ProtectedRoute>
                         </Layout>} 
                     />
+                    <Route path="/products" element={
+                        <Layout>
+                            <ProtectedRoute role="admin">
+                                <Products />
+                            </ProtectedRoute>
+                        </Layout>} 
+                    />
+                    {/* Uncomment if ProductDetails component is available */}
+                    {/* <Route path="/products/:id" element={<Layout><ProductDetails /></Layout>} /> */}
                 </Routes>
             </Router>
         </AuthProvider>
