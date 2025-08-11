@@ -1,38 +1,69 @@
-// src/App.jsx
-
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Home from './pages/Home';
-import Layout from './components/common/Layout'; // New Layout wrapper
-import Dashboard from './components/dashboard/Dashboard';
+import Layout from './components/common/Layout'; 
+import Dashboard from './components/dashboard/Dashboard'; // Assume this is your admin dashboard
+import RentalShop from './components/shop/RentalShop'; // Corrected path for rental shop
 import RentalOrderForm from './components/orders/RentalOrderForm';
 import RentalOrdersList from './components/orders/RentalOrdersList';
 
-const App = () => {
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Public routes without header */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+// Protected Route Component
+const ProtectedRoute = ({ children, role }) => {
+    const { user, loading } = useAuth();
+    if (loading) return <div>Loading...</div>;
 
-          {/* Private or app routes with common header */}
-          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-          <Route path="/rental-order" element={<Layout><RentalOrderForm /></Layout>} />
-          <Route path="/rental-orders" element={<Layout><RentalOrdersList /></Layout>} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+    return user ? (user.role === role ? children : <Navigate to="/" />) : <Navigate to="/login" />;
+};
+
+const App = () => {
+    return (
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
+
+                    {/* Private routes */}
+                    <Route path="/rental-shop" element={
+                        <Layout>
+                            <ProtectedRoute role="customer">
+                                <RentalShop />
+                            </ProtectedRoute>
+                        </Layout>} 
+                    />
+                    <Route path="/dashboard" element={
+                        <Layout>
+                            <ProtectedRoute role="admin">
+                                <Dashboard />
+                            </ProtectedRoute>
+                        </Layout>} 
+                    />
+                    <Route path="/rental" element={
+                        <Layout>
+                            <ProtectedRoute role="customer">
+                                <RentalOrderForm />
+                            </ProtectedRoute>
+                        </Layout>} 
+                    />
+                    <Route path="/orders" element={
+                        <Layout>
+                            <ProtectedRoute role="customer">
+                                <RentalOrdersList />
+                            </ProtectedRoute>
+                        </Layout>} 
+                    />
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
 };
 
 export default App;
