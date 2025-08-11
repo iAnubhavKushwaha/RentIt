@@ -25,7 +25,8 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            api.get('/auth/me') // You need a route to get the user info by token
+            api.get('/auth/me') 
+
                 .then((response) => {
                     setUser(response.data);
                 })
