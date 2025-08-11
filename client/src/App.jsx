@@ -7,34 +7,31 @@ import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Home from './pages/Home';
 
+import Layout from './components/common/Layout'; // new Layout wrapper
 import Dashboard from './components/dashboard/Dashboard';
-// import ProductList from './components/products/ProductList';
-// // import ProductDetail from './components/products/ProductDetail';
-// import OrderHistory from './components/orders/OrderHistory';
-
-
-
-
+import RentalOrderForm from './components/orders/RentalOrderForm';
+import RentalOrdersList from './components/orders/RentalOrdersList';
 
 const App = () => {
   return (
-   <AuthProvider>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/reset-password" element={<ResetPassword />} />
-                    <Route path="/dashboard" element={<Dashboard/>}/>
-                    {/* <Route path="/products" element={<ProductList />} /> */}
-                    {/* <Route path="/products/:id" element={<ProductDetail />} /> */}
-                    {/* <Route path="/orders" element={<OrderHistory />} /> */}
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public routes without header */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
-                </Routes>
-            </Router>
-        </AuthProvider>
-  )
-}
+          {/* Private or app routes with common header */}
+          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/rental-order" element={<Layout><RentalOrderForm /></Layout>} />
+          <Route path="/rental-orders" element={<Layout><RentalOrdersList /></Layout>} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;

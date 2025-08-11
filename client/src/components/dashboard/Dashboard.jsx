@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../common/Header';
 import SearchBar from './SearchBar';
 import DateRangeSelector from './DateRangeSelector';
 import Statistics from './Statistics';
@@ -10,7 +10,6 @@ import TopCustomers from './TopCustomers';
 const Dashboard = () => {
     return (
         <div className="container mx-auto p-6">
-            <Header />
             <SearchBar />
             <DateRangeSelector />
             <Statistics />

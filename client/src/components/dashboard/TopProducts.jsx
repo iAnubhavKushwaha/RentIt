@@ -12,22 +12,25 @@ const TopProducts = () => {
     ];
 
     return (
-        <div className="bg-white shadow rounded mb-6 p-4">
-            <h2 className="text-2xl font-bold">Top Products</h2>
-            <table className="min-w-full table-auto border mt-4">
-                <thead className="bg-blue-100">
+        <div className="bg-white border border-zinc-200 rounded-xl mb-6 p-4 shadow-sm">
+            <h2 className="text-lg font-semibold text-zinc-800">Top Products</h2>
+            <table className="min-w-full table-auto border border-zinc-200 mt-4 text-sm">
+                <thead className="bg-zinc-50">
                     <tr>
-                        <th className="border px-4 py-2">Product</th>
-                        <th className="border px-4 py-2">Ordered</th>
-                        <th className="border px-4 py-2">Revenue</th>
+                        <th className="border border-zinc-200 px-4 py-2 text-left text-zinc-600 font-medium">Product</th>
+                        <th className="border border-zinc-200 px-4 py-2 text-left text-zinc-600 font-medium">Ordered</th>
+                        <th className="border border-zinc-200 px-4 py-2 text-left text-zinc-600 font-medium">Revenue</th>
                     </tr>
                 </thead>
                 <tbody>
                     {products.map((item, index) => (
-                        <tr key={index}>
-                            <td className="border px-4 py-2">{item.product}</td>
-                            <td className="border px-4 py-2">{item.ordered}</td>
-                            <td className="border px-4 py-2">${item.revenue}</td>
+                        <tr
+                            key={index}
+                            className="odd:bg-white even:bg-zinc-50 hover:bg-zinc-100 transition-colors"
+                        >
+                            <td className="border border-zinc-200 px-4 py-2 text-zinc-700">{item.product}</td>
+                            <td className="border border-zinc-200 px-4 py-2 text-zinc-700">{item.ordered}</td>
+                            <td className="border border-zinc-200 px-4 py-2 text-zinc-700">${item.revenue}</td>
                         </tr>
                     ))}
                 </tbody>
