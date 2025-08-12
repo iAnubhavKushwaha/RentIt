@@ -1,5 +1,4 @@
-import React from 'react';
-
+//src\components\products\ProductDetails.jsx
 const ProductDetails = ({ product }) => {
     if (!product) return <p className="text-center text-zinc-500">No product selected.</p>;
 
