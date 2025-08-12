@@ -1,15 +1,27 @@
 import Product from '../models/Product.js';
 
 export const createProduct = async (req, res) => {
-    const { name, description, price, rentable, unit } = req.body;
-    const newProduct = new Product({ name, description, price, rentable, unit });
+    const { name, description, price, rentable, unit, availability } = req.body;
+
+    // Log incoming data for debugging
+    console.log('Incoming product data:', req.body);
+
+    const newProduct = new Product({ 
+        name, 
+        description, 
+        price, 
+        rentable, 
+        unit, 
+        availability 
+    });
 
     try {
         const savedProduct = await newProduct.save();
         res.status(201).json(savedProduct);
     } catch (err) {
+        console.error('Error saving product:', err.message); // Log the error message
         res.status(500).json({
-            error: err.message
+            error: err.message || 'An error occurred while saving the product.'
         });
     }
 };
