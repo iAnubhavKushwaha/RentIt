@@ -214,6 +214,5 @@ MIT License
 ---
 
 ## 📞 Contact
-**Your Name** – your.email@example.com  
-
-Project Link: [Your GitHub Repository]  
+**Anubhav Kushwaha** – ianubhavkushwaha@gmail.com 
+**LinkedIn ** - https://www.linkedin.com/in/ianubhavkushwaha/
