@@ -215,4 +215,6 @@ MIT License
 
 ## 📞 Contact
 **Anubhav Kushwaha** – ianubhavkushwaha@gmail.com 
-**LinkedIn ** - https://www.linkedin.com/in/ianubhavkushwaha/
+---
+
+**LinkedIn Profile** - https://www.linkedin.com/in/ianubhavkushwaha/
